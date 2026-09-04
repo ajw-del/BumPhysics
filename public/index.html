@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Topic Finder</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <div class="eyebrow">VIDEO TOPIC FINDER</div>
+      <h1>채널 영상에서<br><span>다룬 내용을 찾아보세요.</span></h1>
+      <p class="sub">유튜브 채널을 한 번 등록하면 자막을 구간별로 색인하고, Gemini 임베딩으로 의미 기반 검색을 합니다.</p>
+    </header>
+
+    <section class="panel key-panel">
+      <div class="panel-title"><div><h2>🔑 Gemini API 키</h2><p>키는 이 브라우저의 로컬 저장소에만 저장하고, Gemini 요청 때만 서버로 전송합니다.</p></div><span id="keyStatus" class="badge warn">키 미설정</span></div>
+      <div class="input-row"><input id="geminiKey" type="password" autocomplete="off" placeholder="AIza... Gemini API 키를 입력하세요" /><button id="saveKeyBtn">저장</button><button id="testKeyBtn" class="secondary">연결 테스트</button><button id="clearKeyBtn" class="secondary">삭제</button></div>
+      <p class="key-note">⚠️ 공개 사이트에서 API 키를 입력할 경우 브라우저와 통신은 반드시 HTTPS를 사용하세요. 이 프로젝트는 키를 GitHub 코드나 서버의 환경변수에 저장하지 않습니다.</p>
+    </section>
+
+    <section class="panel import-panel">
+      <div class="panel-title"><div><h2>① 채널 등록</h2><p>채널 URL 하나만 넣으면 업로드 영상을 자동으로 가져옵니다.</p></div><span id="configBadge" class="badge">설정 확인 중</span></div>
+      <div class="input-row"><input id="channelUrl" placeholder="https://www.youtube.com/@채널명" /><button id="importBtn">채널 가져오기</button></div>
+      <div class="options"><label><input id="excludeShorts" type="checkbox" /> 3분 이하 영상 제외(쇼츠 제외용 휴리스틱)</label><label>최대 영상 수 <input id="limit" class="small" type="number" min="0" placeholder="전체" /></label><label><input id="refresh" type="checkbox" /> 기존 영상도 다시 색인</label></div>
+      <div id="jobBox" class="job hidden"><div class="job-top"><span id="jobMessage">준비 중…</span><span id="jobPercent">0%</span></div><div class="progress"><div id="progressBar"></div></div><div id="jobCurrent" class="muted"></div></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title"><div><h2>② 검색</h2><p>키워드뿐 아니라 의미가 비슷한 표현도 찾습니다.</p></div></div>
+      <div class="search-row"><input id="query" placeholder="예: 파리가 시간을 느끼는 방식" /><select id="channelSelect"><option value="">전체 채널</option></select><button id="searchBtn">검색</button></div>
+      <div class="chips"><button data-q="파리">파리</button><button data-q="스타링크">스타링크</button><button data-q="블랙홀">블랙홀</button><button data-q="인공지능">인공지능</button></div>
+    </section>
+
+    <section id="library" class="panel library"><div class="panel-title"><div><h2>등록된 채널</h2><p>색인된 영상과 구간 수</p></div></div><div id="channelList" class="channel-list"></div></section>
+
+    <section id="results" class="results"></section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

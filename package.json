@@ -1,0 +1,17 @@
+{
+  "name": "video-topic-finder",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": { "dev": "node server.js", "start": "node server.js" },
+  "dependencies": {
+    "@google/genai": "latest",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "xlsx": "^0.18.5",
+    "youtube-transcript-plus": "^2.0.1"
+  }
+}
